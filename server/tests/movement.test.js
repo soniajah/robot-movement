@@ -1,4 +1,4 @@
-var models = require('../models')
+var libs = require('../libs')
 
 test('the instructions RFRFFRFRF with roomDimension (5,5) and startPosition (1,2,N) will return 1 3 N', () => {
   let roomDimension = {
@@ -11,7 +11,7 @@ test('the instructions RFRFFRFRF with roomDimension (5,5) and startPosition (1,2
     direction: "N"
   }
   let instructions = "RFRFFRFRF"
-  let result = models.movement.getMovementReport(roomDimension, startPosition, instructions)
+  let result = libs.movement.getMovementReport(roomDimension, startPosition, instructions)
   expect(result.x + " " + result.y + " " + result.direction).toBe("1 3 N")
 })
 
@@ -26,7 +26,7 @@ test('the instructions RFLFFLRF with roomDimension (5,5) and startPosition (0,0,
     direction: "E"
   }
   let instructions = "RFLFFLRF"
-  let result = models.movement.getMovementReport(roomDimension, startPosition, instructions)
+  let result = libs.movement.getMovementReport(roomDimension, startPosition, instructions)
   expect(result.x + " " + result.y + " " + result.direction).toBe("3 1 E")
 })
 

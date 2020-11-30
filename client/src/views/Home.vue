@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h3>Robot movement application</h3>
-    <Form :allData="allData" v-on:submitForm="postMovementInstructions" />
+    <Form :allData="allData" v-on:submit-form="postMovementInstructions" />
     <Result :allData="allData" />
   </div>
 </template>
@@ -11,7 +11,7 @@ import axios from 'axios';
 import Form from '@/components/Form.vue';
 import Result from '@/components/Result.vue';
 
-const url = 'http://localhost:4000';
+const apiUrl = 'http://localhost:4000';
 
 export default {
   name: 'Home',
@@ -35,20 +35,19 @@ export default {
     }
   },
   methods: {
-     postMovementInstructions(formData) {
+     postMovementInstructions() {
       let self = this
-
-      axios.post(url + '/api/movement-instructions', {
+      axios.post(apiUrl + '/api/movement-instructions', {
         roomDimension: {
-          x: parseInt(formData.roomDimensionX),
-          y: parseInt(formData.roomDimensionY)
+          x: parseInt(this.allData.roomDimensionX),
+          y: parseInt(this.allData.roomDimensionY)
         },
         startPosition: {
-          x: parseInt(formData.startPositionX),
-          y: parseInt(formData.startPositionY),
-          direction: formData.startDirection
+          x: parseInt(this.allData.startPositionX),
+          y: parseInt(this.allData.startPositionY),
+          direction: this.allData.startDirection
         },
-        instructions: formData.instructions.toUpperCase()
+        instructions: this.allData.instructions.toUpperCase()
       })
       .then(async function (response) {
         self.allData.endX =  response.data.x

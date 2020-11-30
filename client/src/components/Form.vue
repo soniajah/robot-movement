@@ -1,6 +1,6 @@
 <template>
   <div>
-      <form action="#" @submit.prevent="handleSubmit">
+      <form action="#" @submit.prevent="$emit('submit-form')">
       <h6>Room Dimensions</h6>
       <div>
         <label for="roomDimensionX">x:</label>
@@ -11,11 +11,11 @@
       <h6>Start Position</h6>
       <div>
         <label for="startPositionX">x:</label>
-        <input type="number" v-model="allData.startPositionX" :min="0">
+        <input type="number" v-model="allData.startPositionX" :min="0" :max="allData.roomDimensionX - 1">
         <label for="startPositionY">y:</label>
-        <input type="number" v-model="allData.startPositionY" :min="0">
+        <input type="number" v-model="allData.startPositionY" :min="0" :max="allData.roomDimensionY - 1">
         <label for="startDirection">Direction:</label>
-        <select v-model="startDirection" id="direction">
+        <select v-model="allData.startDirection" id="direction">
           <option value="N">North</option>
           <option value="E">East</option>
           <option value="S">South</option>
@@ -25,7 +25,7 @@
       <h6>Moving Instructions</h6>
       <div>
         <label for="instructions">Instructions</label>
-        <input type="text" id="instructions" v-model="instructions" placeholder="example RFRFFRF or rfrffr">
+        <input type="text" id="instructions" v-model="allData.instructions" placeholder="example RFRFFRF or rfrffr" @keyup="validateInstructions()" @change="validateInstructions()">
       </div>
       <input type="submit" value="Submit" class="submit-button">
     </form>
@@ -36,27 +36,10 @@
 export default {
   name: 'Form',
   props: ['allData'],
-  data: () => {
-    return {
-      roomDimensionX: 5,
-      roomDimensionY: 5,
-      startPositionX: 0,
-      startPositionY: 0,
-      startDirection: 'E',
-      instructions: '',
-    }
-  },
   methods: {
-    handleSubmit() {
-      const formData = {
-        roomDimensionX: this.roomDimensionX,
-        roomDimensionY: this.roomDimensionY,
-        startPositionX: this.startPositionX,
-        startPositionY: this.startPositionY,
-        startDirection: this.startDirection,
-        instructions: this.instructions,
-      }
-      this.$emit('submitForm', formData)
+    validateInstructions() {
+      this.allData.instructions = this.allData.instructions.replace(/[^lLrRfF]/gi, '')
+      this.allData.instructions = this.allData.instructions.toUpperCase()
     }
   }
 }

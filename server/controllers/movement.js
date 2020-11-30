@@ -1,5 +1,5 @@
-var models = require('../models')
+var libs = require('../libs')
 
 exports.move = (req, res) => {
-  res.send(models.movement.getMovementReport(req.body.roomDimension, req.body.startPosition, req.body.instructions))
+  res.send(libs.movement.getMovementReport(req.body.roomDimension, req.body.startPosition, req.body.instructions))
 }

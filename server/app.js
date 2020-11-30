@@ -9,7 +9,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', controllers.index);
 app.post('/api/movement-instructions', controllers.movement.move)
 
 const port = process.env.PORT || 4000;
