@@ -25,7 +25,7 @@
       <h6>Moving Instructions</h6>
       <div>
         <label for="instructions">Instructions</label>
-        <input type="text" id="instructions" v-model="allData.instructions" placeholder="example RFRFFRF or rfrffr">
+        <input type="text" id="instructions" v-model="instructions" placeholder="example RFRFFRF or rfrffr">
       </div>
       <input type="submit" value="Submit" class="submit-button">
     </form>
