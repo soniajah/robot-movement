@@ -1,6 +1,6 @@
 <template>
   <div>
-      <form action="#" @submit.prevent="$emit('submit-form')">
+    <form action="#" @submit.prevent="$emit('submit-form')">
       <h6>Room Dimensions</h6>
       <div>
         <label for="roomDimensionX">x:</label>
